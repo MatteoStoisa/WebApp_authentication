@@ -1,0 +1,18 @@
+body {
+    background-color: lightblue;
+}
+
+.error {
+    color: red;
+}
+
+.centered_forms {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.button_final {
+    margin-top: 50px;
+}
