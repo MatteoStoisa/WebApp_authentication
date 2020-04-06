@@ -27,14 +27,22 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String registrationPage(@ModelAttribute("command") RegistrationCommand registrationCommand) {
+    public String registrationPage(@ModelAttribute("command") RegistrationCommand registrationCommand,
+                                   HttpSession httpSession) {
+        if(httpSession.getAttribute("username") != null) {
+            return "redirect:/";
+        }
         return "/register.html";
     }
 
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("command") RegistrationCommand registrationCommand,
-                           BindingResult bindingResult) {
+                           BindingResult bindingResult,
+                           HttpSession httpSession) {
         //registrationManager.forEach((k, v) -> log.info("< " + k + " " + v + " >")); //log users info (debug)
+        if(httpSession.getAttribute("username") != null) {
+            return "/";
+        }
         if(!registrationCommand.registrationPassword.equals(registrationCommand.registrationPassword2)) {
             bindingResult.addError(new FieldError("command", "registrationPassword2","Passwords must match"));
         }
@@ -64,15 +72,22 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login(@ModelAttribute("command") LoginCommand loginCommand) {
+    public String loginPage(@ModelAttribute("command") LoginCommand loginCommand,
+                            HttpSession httpSession) {
+        if(httpSession.getAttribute("username") != null) {
+            return "redirect:/";
+        }
         return "/login.html";
     }
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("command") LoginCommand loginCommand,
                         HttpSession httpSession) {
+        if(httpSession.getAttribute("username") != null) {
+            return "/login";
+        }
         if(loginCommand.loginEmail.equals("") || loginCommand.loginPassword.equals("")) {
-            return "redirect:/";
+            return "/login";
         }
         if(registrationManager.containsKey(loginCommand.loginEmail)) {
             if(registrationManager.get(loginCommand.loginEmail).userPassword.equals(loginCommand.loginPassword)) {
@@ -81,12 +96,12 @@ public class HomeController {
             }
             else {
                 log.warning("wrong password");
-                return "redirect:/";
+                return "/login";
             }
         }
         else {
             log.warning("wrong email");
-            return "redirect:/";
+            return "/login";
         }
     }
 
