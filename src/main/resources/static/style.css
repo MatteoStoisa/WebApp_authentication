@@ -7,10 +7,11 @@ body {
 }
 
 .centered_forms {
-    width: 10%;
+    width: 30%;
     text-align: center;
     margin: auto;
     display: block;
+    font-size: large;
 }
 
 .button_final {
