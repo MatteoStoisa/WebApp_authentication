@@ -1,5 +1,7 @@
 body {
     background-color: lightblue;
+    margin-top: 2%;
+    margin-left: 2%;
 }
 
 .error {
@@ -16,4 +18,8 @@ body {
 
 .button_final {
     margin-top: 50px;
+}
+
+.success {
+    color: green;
 }

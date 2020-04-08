@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>PRIVATE</h1>
+    <div class="success" th:if="${LogSuccessLogin}" th:text="${LogSuccessLogin}"></div>
     <form action="/logout" method="post">
         <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
         <button type="submit" class="btn btn-primary btn-lg">Logout</button>

@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>HOMEPAGE</h1>
+    <div class="success" th:if="${logCorrectlyRegistered}" th:text="${logCorrectlyRegistered}"></div>
+    <div class="error" th:if="${logSessionLogged}" th:text="${logSessionLogged}"></div>
+    <div class="error" th:if="${logNoLogged}" th:text="${logNoLogged}"></div>
     <a class="btn btn-primary btn-lg" href="/private" role="button">Private</a>
     <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
     <a class="btn btn-primary btn-lg" href="/register" role="button">Register</a>
